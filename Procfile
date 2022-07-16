@@ -1,1 +1,4 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.example.SpringJava.SpringJavaApplication
+
+web: java -Xms256m -jar server.jar
+cache: java -jar mycache.jar
+web_foo: java -jar other.jar
