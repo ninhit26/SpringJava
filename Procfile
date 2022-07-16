@@ -1,4 +1,1 @@
-
-web: java -Xms256m -jar server.jar
-cache: java -jar mycache.jar
-web_foo: java -jar other.jar
+web: java -jar target/java-getting-started-1.0.jar
