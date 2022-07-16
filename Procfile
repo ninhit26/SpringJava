@@ -1,2 +1,2 @@
 web: bundle exec rails server -p $PORT
-web: java -jar target/springjava-1.0.0.jar
+gradlew build && java -jar build/libs/gs-rest-service-0.1.0.jar
