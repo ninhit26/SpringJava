@@ -18,10 +18,10 @@ public class SpringJavaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJavaApplication.class, args);
 	}
-	@Bean
-	PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+//	@Bean
+//	PasswordEncoder passwordEncoder(){
+//		return new BCryptPasswordEncoder();
+//	}
 
 	@Bean
 	CommandLineRunner run(UserService userService) {
