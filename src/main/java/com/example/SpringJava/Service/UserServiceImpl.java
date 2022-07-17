@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,32 +22,25 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository ;
     private final RoleRepository roleRepository ;
-    private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserModel userModel = userRepository.findByUsername(username);
-        if (userModel == null){
-            log.error("User not four the in database");
-            throw new UsernameNotFoundException("User not four the in database");
-        }else {
-            log.info("User found in the database {}" + username );
-        }
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        userModel.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
-
-        return new User(userModel.getUsername(),userModel.getPassword(),authorities);
-    }
+//    @Override
+//    public UserModel loadUserByUsername(String username) throws UsernameNotFoundException {
+//        UserModel userModel = userRepository.findByUsername(username);
+//        if (userModel == null){
+//            log.error("User not four the in database");
+//            throw new UsernameNotFoundException("User not four the in database");
+//        }else {
+//            log.info("User found in the database {}" + username );
+//        }
+//        return userModel ;
+//    }
 
     @Override
     public UserModel userSave(UserModel userModel) {
         log.info("Save to db ");
-        userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
         return userRepository.save(userModel);
     }
 
